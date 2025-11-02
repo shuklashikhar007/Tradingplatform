@@ -25,36 +25,61 @@ export default function OrderBook() {
   const maxAskTotal = asks.reduce((m, r) => Math.max(m, r.total), 0) || 1;
 
   return (
-    <div className="bg-white rounded shadow p-4">
-      <div className="flex items-center justify-between mb-3">
-        <div className="font-medium">Bids</div>
+    <div className="bg-white rounded-lg shadow-lg p-5 font-sans">
+      {}
+      <div className="flex items-center justify-between mb-4">
+        <div className="font-semibold text-lg text-green-600">Bids</div>
         <div className="text-center">
-          <div className="text-xs text-gray-500">Spread</div>
-          <div className="font-semibold">{formatNumber(spread)}</div>
-          <div className="text-xs text-gray-500">Top Bid / Ask</div>
-          <div className="text-sm">{formatNumber(topBid)} / {formatNumber(topAsk)}</div>
+          <div className="text-xs text-gray-400 uppercase tracking-wide">Spread</div>
+          <div className="font-bold text-lg">{formatNumber(spread)}</div>
+          <div className="text-xs text-gray-400 mt-1 uppercase tracking-wide">Top Bid / Ask</div>
+          <div className="text-sm font-medium">{formatNumber(topBid)} / {formatNumber(topAsk)}</div>
         </div>
-        <div className="font-medium">Asks</div>
+        <div className="font-semibold text-lg text-red-600">Asks</div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div>
+      {/* Order Book Grid */}
+      <div className="grid grid-cols-2 gap-6">
+        {/* Bids */}
+        <div className="space-y-1">
           {bids.slice(0, 20).map((r) => (
-            <div key={r.price} className="relative py-1 flex justify-between items-center text-sm">
-              <div className="w-28">{formatNumber(r.price)}</div>
+            <div
+              key={r.price}
+              className="relative flex justify-between items-center text-sm px-2 py-1 rounded hover:bg-green-50 transition"
+            >
+              <div className="w-28 font-medium text-green-700">{formatNumber(r.price)}</div>
               <div className="w-24 text-right">{formatNumber(r.qty)}</div>
-              <div className="w-24 text-right">{formatNumber(r.total)}</div>
-              <div className="absolute left-0 top-0 bottom-0" style={{ width: `${(r.total / maxBidTotal) * 100}%`, background: 'rgba(16,185,129,0.12)', zIndex: -1 }} />
+              <div className="w-24 text-right font-semibold">{formatNumber(r.total)}</div>
+              <div
+                className="absolute left-0 top-0 bottom-0 rounded-l"
+                style={{
+                  width: `${(r.total / maxBidTotal) * 100}%`,
+                  background: 'rgba(16,185,129,0.2)',
+                  zIndex: -1,
+                }}
+              />
             </div>
           ))}
         </div>
-        <div>
+
+        {/* Asks */}
+        <div className="space-y-1">
           {asks.slice(0, 20).map((r) => (
-            <div key={r.price} className="relative py-1 flex justify-between items-center text-sm">
-              <div className="w-28">{formatNumber(r.price)}</div>
+            <div
+              key={r.price}
+              className="relative flex justify-between items-center text-sm px-2 py-1 rounded hover:bg-red-50 transition"
+            >
+              <div className="w-28 font-medium text-red-700">{formatNumber(r.price)}</div>
               <div className="w-24 text-right">{formatNumber(r.qty)}</div>
-              <div className="w-24 text-right">{formatNumber(r.total)}</div>
-              <div className="absolute right-0 top-0 bottom-0" style={{ width: `${(r.total / maxAskTotal) * 100}%`, background: 'rgba(239,68,68,0.12)', zIndex: -1 }} />
+              <div className="w-24 text-right font-semibold">{formatNumber(r.total)}</div>
+              <div
+                className="absolute right-0 top-0 bottom-0 rounded-r"
+                style={{
+                  width: `${(r.total / maxAskTotal) * 100}%`,
+                  background: 'rgba(239,68,68,0.2)',
+                  zIndex: -1,
+                }}
+              />
             </div>
           ))}
         </div>
@@ -62,3 +87,4 @@ export default function OrderBook() {
     </div>
   );
 }
+

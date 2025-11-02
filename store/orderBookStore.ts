@@ -1,4 +1,4 @@
-import create from 'zustand';
+import {create} from 'zustand';
 export type Trade = { price: number; qty: number; timestamp: number; isBuyerMaker: boolean };
 type Side = 'bids' | 'asks';
 
