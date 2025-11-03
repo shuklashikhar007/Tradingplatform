@@ -18,7 +18,7 @@ export default function Page() {
       transition={{ duration: 0.6 }}
       className="min-h-screen w-full bg-gray-900 text-gray-100 font-sans flex flex-col"
     >
-      <div className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <div className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full bg-transparent">
         {/* Page Header */}
         <motion.div
           initial={{ y: -20, opacity: 0 }}
